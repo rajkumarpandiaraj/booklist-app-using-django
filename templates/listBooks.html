@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action='' id='form' method="POST">
+        {%csrf_token %}
+        {{form}}
+        <input type="submit" value="Add Book" id="submit">
+    </form>
+    <div id="table">
+        <table>
+            <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Auhtor</td>
+                    <td>ISBN</td>
+                    <td>Delete</td>
+                </tr>
+            </thead>
+            <tbody id= "table-body">
+            
+                {% for item in bookList %}
+                    <tr>
+                        <td>{{item.title}}</td>
+                        <td>{{item.author}}</td>
+                        <td>{{item.isbn}}</td>
+                        <td>
+                            <a href="{% url 'delete_book' item.id %}">
+                                <i class="fa fa-trash delete"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            
+            
+            
+            </tbody>
+        </table>
+        
+    </div>
+{% endblock %}
